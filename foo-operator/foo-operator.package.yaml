@@ -1,0 +1,6 @@
+packageName: foo-operator
+channels: 
+- name: alpha
+  currentCSV: foo-operator.v0.1.3
+defaultChannel: alpha
+

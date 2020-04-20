@@ -1,0 +1,92 @@
+#! validate-crd: deploy/chart/templates/0000_30_02-clusterserviceversion.crd.yaml
+#! parse-kind: ClusterServiceVersion
+apiVersion: operators.coreos.com/v1alpha1
+kind: ClusterServiceVersion
+metadata:
+  name: foo-operator.v0.1.3
+  annotations:
+    categories: "AI/Machine Learning"
+    description: "Short description"
+    containerImage: docker.io/busybox:latest
+    createdAt: 2019-08-02T15:00:00Z
+    repository: https://github.com/not/there
+    certified: "false"
+    support: hello@dilbert.io
+spec:
+  displayName: Foo Operator
+  description: |
+    Manage all of your foobars, longer description.
+
+  keywords: []
+
+  maintainers:
+  - name: Foo Technologies
+    email: hello@dilbert.io
+
+  provider:
+    name: Foo Technologies
+
+  version: 0.1.3
+  maturity: alpha
+
+  links: []
+
+  labels:
+    name: foo-operator
+  selector:
+    matchLabels:
+      name: foo-operator
+  installModes:
+  - type: OwnNamespace
+    supported: true
+  - type: SingleNamespace
+    supported: true
+  - type: MultiNamespace
+    supported: false
+  - type: AllNamespaces
+    supported: true  
+  install:
+    strategy: deployment
+    spec:
+      permissions:
+      - serviceAccountName: foobar
+        rules:
+        - apiGroups:
+          - "*"
+          resources:
+          - "*"
+          verbs:
+          - "*"
+      deployments:
+      - name: foo-controller-manager
+        spec:
+          selector:
+            matchLabels:
+              control-plane: foo-controller-manager
+          serviceName: foo-controller-manager-service
+          template:
+            metadata:
+              labels:
+                control-plane: foo-controller-manager
+            spec:
+              serviceAccountName: foobar
+              containers:
+              - command: [ "/bin/sh", "-c", "--" ]
+                args: [ "while true; do echo looping...; sleep 5; done" ]
+                env:
+                - name: WATCH_NAMESPACE 
+                  valueFrom:
+                    fieldRef:
+                      fieldPath: metadata.annotations['olm.targetNamespaces']
+                image: docker.io/busybox
+                imagePullPolicy: IfNotPresent
+                name: manager
+              terminationGracePeriodSeconds: 10
+
+  customresourcedefinitions:
+    owned:
+    - kind: FooBar
+      name: foobars.dilbert.io
+      version: v1alpha2
+      displayName: FooBar deployment
+      description: A foobar deployment
