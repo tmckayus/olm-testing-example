@@ -42,7 +42,7 @@ This guide gives you a quick howto, but you can delve deeper here
 
 5. Create a bundle from the foo-operator directory and push it to quay.io.
 
-   The arguments to push are _source_directory quay_username repository_name bundle_version quay_token_.
+   The arguments to push are _sourcedir username repository bundleversion token_.
 
    Note for now that the bundle version is arbitrary.
 
@@ -92,7 +92,7 @@ This guide gives you a quick howto, but you can delve deeper here
 
 1. Make some modification to the cluster service version file in the foo-operator directory
 
-2. Push the new bundle version to quay.io but increment the _bundle_version_ value
+2. Push the new bundle version to quay.io but increment the _bundleversion_ value
 
    ```
    $ operator-courier push foo-operator tmckayus foo-operator 0.1.4 "$QUAY_TOKEN"
