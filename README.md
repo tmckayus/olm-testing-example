@@ -4,6 +4,17 @@ Here is a short example of how to test an operator bundle with the OLM.
 It uses a fake operator which is really just a docker.io/busybox instance
 looping and echoing, but it's enough to illustrate the steps.
 
+*NOTE*: do not delete application repos until the following bug is fixed
+
+* https://issues.redhat.com/browse/PROJQUAY-762
+* https://github.com/quay/quay/pull/406
+
+* If you need to overwrite an application bundle with changes, pay
+attention to step 2 under *How to iterate quickly and update the foo-operator* below
+* If you do delete an application repo and your namespace no longer works for
+testing operators, you can create a new quay account or try deleting and recreating the
+existing one.
+
 # Helpful links
 
 This guide gives you a quick howto, but you can delve deeper here
