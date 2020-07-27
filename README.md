@@ -1,3 +1,10 @@
+# This repository has moved!
+
+This repository has moved to https://github.com/AICoE/olm-testing-example
+
+Any future updates will be made there.
+
+
 # Overview
 
 Here is a short example of how to test an operator bundle with the OLM.
